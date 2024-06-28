@@ -9,6 +9,7 @@
     "test": "jest",
     "eslint": "eslint ./**/*.{js,jsx}",
     "build": "webpack --mode production",
+    "build:prod": "bash scripts/build_prod.sh",
     "test:e2e": "playwright test",
     "report:e2e": "playwright show-report"
   },
