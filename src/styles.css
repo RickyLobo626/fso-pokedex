@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700');
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -8,12 +9,17 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-size: 18px;
+  background-color: #3d3d3d;
 }
 
 body > div {
   flex: 1 0 auto;
+}
+
+a {
+  color: white;
 }
 
 footer {
@@ -89,7 +95,7 @@ footer {
 }
 
 .pokemon-name {
-  font-family: "Open Sans Condensed", "Open Sans";
+  font-family: 'Open Sans Condensed', 'Open Sans';
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -107,7 +113,7 @@ footer {
 
 .pokemon-stats {
   flex: 1;
-  font-family: "Open Sans Condensed", "Open Sans";
+  font-family: 'Open Sans Condensed', 'Open Sans';
   padding-top: 15px;
   text-transform: capitalize;
 }
