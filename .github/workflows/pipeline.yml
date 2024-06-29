@@ -22,6 +22,13 @@ jobs:
         run: npm run eslint
       - name: Build for production
         run: npm run build
+      - name: Notify on build failure
+        if: ${{ failure() || cancelled() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Run unit tests
         run: npm run test
       - name: Install Playwright Browsers
@@ -37,6 +44,7 @@ jobs:
       - name: Deploy to production
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{secrets.RENDER_SERVICE_ID}}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -50,3 +58,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: 'patch'
+      - name: Notify on new version deployed
+        if: ${{ success()}}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: info
+          details: A new version has been deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
